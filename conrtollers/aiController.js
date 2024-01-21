@@ -3,7 +3,7 @@ const AppError = require('../utils/appError');
 const Student = require('../models/studentModel');
 
 exports.evaluate = catchAsync(async (req, res, next) => {
-	const student = await Student.findById(req.params.id);
+	const student = await Student.findById(req.body.id);
 	if (!student) {
 		return next(new AppError('No student found with that ID', 404));
 	}
