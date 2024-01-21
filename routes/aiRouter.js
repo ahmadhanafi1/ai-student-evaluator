@@ -1,10 +1,8 @@
 const express = require('express');
-const aiContoller = require("../conrtollers/aiController")
+const aiController = require('../conrtollers/aiController')
 
 const router = express.Router();
 
-
-// router.post('/evaluation', aiController.evaluation)
-
+router.post('/evaluate', aiController.evaluate)
 
 module.exports = router;
