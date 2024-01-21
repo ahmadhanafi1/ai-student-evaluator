@@ -3,7 +3,7 @@ const AppError = require('../utils/appError');
 const Student = require('../models/studentModel');
 
 exports.evaluate = catchAsync(async (req, res, next) => {
-	const student = await Student.findById(req.body.id);
+	const student = await Student.findById(req.body.studentId);
 	if (!student) {
 		return next(new AppError('No student found with that ID', 404));
 	}
@@ -29,7 +29,8 @@ exports.evaluate = catchAsync(async (req, res, next) => {
 				"role": "user",
 				"content": `You are tasked with judging a student in the ${req.body.subject} subject. The student's skills and knowledge are as follows: ${studentSkills}. I want you to judge the the sudent's level of knowledge about ${req.body.subject} The only answers that apply are numeral answers from 1 to 10, meaning 1, 2, 3, 4, 5, 6, 7, 8, 9, 10. If the answer is not very clear, choose the nearest option.Limit your answer to one number only. either 1, 2, 3, 4 ,5 ,6 ,7 ,8 ,9 or 10. Don't explain anything. don't say anything else. just one number. And you have to answer even if the result is not clear.`
 			  }
-			]
+			],
+			"temperature": 0.4,
 		})
 	})
 	const data = await response.json()
